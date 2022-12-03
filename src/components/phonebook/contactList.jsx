@@ -4,12 +4,6 @@ import { useSelector } from 'react-redux';
 
 export const ContactList = () => {
   const visibleContacts = useSelector(selectVisibleContacts);
-  // const filter = useSelector(selectFilterValue);
-  // const contacts = useSelector(selectContacts);
-
-  // const filteredContacts = contacts.filter(contact =>
-  //   contact.name.toLowerCase().includes(filter.value.toLowerCase())
-  // );
 
   return (
     <ul>
