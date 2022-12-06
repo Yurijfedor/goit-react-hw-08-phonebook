@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { FormEl, LabelEl, ButtonEl } from './contactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/contacts/operations';
 import { selectContacts } from 'redux/selectors';
+import { Box, TextField, Button } from '@mui/material';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
@@ -47,33 +47,57 @@ export const ContactForm = () => {
   };
 
   return (
-    <FormEl onSubmit={handleSubmit}>
-      <LabelEl>
-        Name
-        <input
-          onChange={handleChange}
-          type="text"
-          name="name"
-          value={name}
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          required
-        />
-      </LabelEl>
-      <LabelEl>
-        Number
-        <input
-          onChange={handleChange}
-          type="tel"
-          name="number"
-          value={number}
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
-        />
-      </LabelEl>
-
-      <ButtonEl type="submit">Add contact</ButtonEl>
-    </FormEl>
+    <Box
+      component="form"
+      sx={{
+        '& .MuiTextField-root': {
+          my: 2,
+          mx: 'auto',
+          width: '25ch',
+          display: 'block',
+        },
+      }}
+      onSubmit={handleSubmit}
+    >
+      <TextField
+        required
+        label="name"
+        InputLabelProps={{
+          focused: true,
+        }}
+        name="name"
+        value={name}
+        variant="filled"
+        onChange={handleChange}
+        inputProps={{
+          pattern: "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$",
+          title:
+            "Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan",
+        }}
+      />
+      <TextField
+        required
+        label="number"
+        InputLabelProps={{
+          focused: true,
+        }}
+        name="number"
+        value={number}
+        variant="filled"
+        onChange={handleChange}
+        inputProps={{
+          pattern: '^[+][0-9]{1,3}.[0-9]{4,14}(?:x.+)?$',
+          title:
+            'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +',
+        }}
+      ></TextField>
+      <Button
+        type="submit"
+        variant="contained"
+        sx={{ height: 25, display: 'flex', alignItems: 'center', mx: 'auto' }}
+      >
+        Add contact
+      </Button>
+    </Box>
   );
 };

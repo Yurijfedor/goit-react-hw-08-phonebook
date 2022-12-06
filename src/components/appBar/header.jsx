@@ -8,7 +8,7 @@ export const Header = () => {
   const { isLoggedIn } = useAuth();
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ zIndex: 2 }}>
       <Toolbar>
         <Typography
           variant="h5"

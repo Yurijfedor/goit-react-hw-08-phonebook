@@ -1,17 +1,31 @@
 import PropTypes from 'prop-types';
-import { ButtonEl } from './contactForm.styled';
-import { Box } from 'constans';
 import { useDispatch } from 'react-redux';
 import { deleteContact } from '../../redux/contacts/operations';
+import { ListItem, ListItemText, Button } from '@mui/material';
 
 export const Contact = ({ contactInfo: { name, number, id } }) => {
   const dispatch = useDispatch();
 
   return (
-    <Box display="flex" justifyContent="space-between">
-      {name}: {number}
-      <ButtonEl onClick={() => dispatch(deleteContact(id))}>Delete</ButtonEl>
-    </Box>
+    <ListItem sx={{ py: 0 }}>
+      <ListItemText
+        primaryTypographyProps={{
+          fontSize: 20,
+          fontWeight: 'medium',
+          letterSpacing: 0,
+          color: '#42a5f5',
+        }}
+        primary={`${name}: ${number}`}
+      />
+
+      <Button
+        variant="contained"
+        sx={{ height: 25, display: 'flex', alignItems: 'center', mx: 'auto' }}
+        onClick={() => dispatch(deleteContact(id))}
+      >
+        Delete
+      </Button>
+    </ListItem>
   );
 };
 

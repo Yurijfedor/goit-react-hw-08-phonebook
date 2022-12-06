@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Helmet } from 'react-helmet';
 import { ContactList } from 'components/contacts/contactList';
 import { ContactForm } from 'components/contacts/contactForm';
 import { fetchContacts } from 'redux/contacts/operations';
 import { selectIsLoading } from 'redux/selectors';
 import { Filter } from 'components/contacts/filter';
+import { Container } from '@mui/material';
+import { Box } from '@mui/system';
 
 export default function Contacts() {
   const dispatch = useDispatch();
@@ -16,15 +17,15 @@ export default function Contacts() {
   }, [dispatch]);
 
   return (
-    <>
-      <Helmet>
-        <title>Your contacts</title>
-      </Helmet>
+    <Container maxWidth="sm">
+      <Box component="h1" sx={{ color: '#42a5f5', textAlign: 'center' }}>
+        Your contacts
+      </Box>
       <ContactForm />
       <Filter />
       <div>{isLoading && 'Request in progress...'}</div>
 
       <ContactList />
-    </>
+    </Container>
   );
 }

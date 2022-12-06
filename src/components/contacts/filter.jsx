@@ -1,17 +1,19 @@
-import { LabelFilterEl } from './contactForm.styled';
 import { useDispatch } from 'react-redux';
 import { setFilter } from '../../redux/filter/filtersSlice';
+import { TextField } from '@mui/material';
 
 export const Filter = () => {
   const dispatch = useDispatch();
 
   return (
-    <LabelFilterEl>
-      Find contacts by name
-      <input
-        onChange={evt => dispatch(setFilter(evt.currentTarget.value))}
-        type="text"
-      />
-    </LabelFilterEl>
+    <TextField
+      type="text"
+      label="Find contacts by name"
+      InputLabelProps={{
+        focused: true,
+      }}
+      margin="normal"
+      onChange={evt => dispatch(setFilter(evt.currentTarget.value))}
+    />
   );
 };
