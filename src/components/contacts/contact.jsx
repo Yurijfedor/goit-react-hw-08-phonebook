@@ -14,7 +14,7 @@ export const Contact = ({ contactInfo }) => {
           fontSize: 20,
           fontWeight: 'medium',
           letterSpacing: 0,
-          color: '#42a5f5',
+          color: '#2d5cc2',
         }}
         primary={`${contactInfo.name}: ${contactInfo.number}`}
       />

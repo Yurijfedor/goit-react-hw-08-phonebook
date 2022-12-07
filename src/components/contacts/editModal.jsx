@@ -23,7 +23,6 @@ export const EditContact = ({ contact }) => {
   return (
     <div>
       <IconButton
-        color=""
         sx={{
           height: 25,
           width: 25,
