@@ -17,7 +17,7 @@ export default function Contacts() {
   }, [dispatch]);
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" sx={{ position: 'relative' }}>
       <Box component="h1" sx={{ color: '#42a5f5', textAlign: 'center' }}>
         Your contacts
       </Box>

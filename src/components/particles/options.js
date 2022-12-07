@@ -1,11 +1,11 @@
 export const options = {
   fullScreen: {
     enable: true,
-    // zIndex: 1,
+    // zIndex: 0,
   },
   particles: {
     number: {
-      value: 15,
+      value: 10,
       density: {
         enable: false,
         value_area: 800,

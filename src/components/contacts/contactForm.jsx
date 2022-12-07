@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/contacts/operations';
+import { addContact, editContact } from 'redux/contacts/operations';
 import { selectContacts } from 'redux/selectors';
 import { Box, TextField, Button } from '@mui/material';
 
-export const ContactForm = () => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+export const ContactForm = ({ currentContact, setModalClose }) => {
+  const [name, setName] = useState(currentContact ? currentContact.name : '');
+  const [number, setNumber] = useState(
+    currentContact ? currentContact.number : ''
+  );
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
-
   const handleChange = evt => {
     const name = evt.target.name;
     switch (name) {
@@ -41,6 +42,19 @@ export const ContactForm = () => {
     reset();
   };
 
+  const onHandleSubmit = evt => {
+    evt.preventDefault();
+    const contactName = evt.target.name.value;
+    const contactNumber = evt.target.number.value;
+    const contact = {
+      id: currentContact.id,
+      name: contactName,
+      number: contactNumber,
+    };
+    dispatch(editContact(contact));
+    setModalClose(false);
+  };
+
   const reset = () => {
     setName('');
     setNumber('');
@@ -48,6 +62,7 @@ export const ContactForm = () => {
 
   return (
     <Box
+      id="contactForm"
       component="form"
       sx={{
         '& .MuiTextField-root': {
@@ -56,8 +71,9 @@ export const ContactForm = () => {
           width: '25ch',
           display: 'block',
         },
+        zIndex: 50,
       }}
-      onSubmit={handleSubmit}
+      onSubmit={currentContact ? onHandleSubmit : handleSubmit}
     >
       <TextField
         required
@@ -96,7 +112,7 @@ export const ContactForm = () => {
         variant="contained"
         sx={{ height: 25, display: 'flex', alignItems: 'center', mx: 'auto' }}
       >
-        Add contact
+        {currentContact ? 'Edit contact' : 'Add contact'}
       </Button>
     </Box>
   );

@@ -24,9 +24,7 @@ export const App = () => {
     await loadFull(engine);
   }, []);
 
-  const particlesLoaded = useCallback(async container => {
-    await console.log(container);
-  }, []);
+  const particlesLoaded = useCallback(async container => {}, []);
 
   useEffect(() => {
     dispatch(refreshUser());
@@ -34,12 +32,12 @@ export const App = () => {
 
   return (
     <>
-      <Particles
+      {/* <Particles
         id="tsparticles"
         init={particlesInit}
         loaded={particlesLoaded}
         options={options}
-      />
+      /> */}
       {isRefreshing ? (
         <b>Refreshing user...</b>
       ) : (

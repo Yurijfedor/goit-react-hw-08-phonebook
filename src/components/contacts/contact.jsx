@@ -2,8 +2,9 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { deleteContact } from '../../redux/contacts/operations';
 import { ListItem, ListItemText, Button } from '@mui/material';
+import { EditContact } from './editModal';
 
-export const Contact = ({ contactInfo: { name, number, id } }) => {
+export const Contact = ({ contactInfo }) => {
   const dispatch = useDispatch();
 
   return (
@@ -15,13 +16,13 @@ export const Contact = ({ contactInfo: { name, number, id } }) => {
           letterSpacing: 0,
           color: '#42a5f5',
         }}
-        primary={`${name}: ${number}`}
+        primary={`${contactInfo.name}: ${contactInfo.number}`}
       />
-
+      <EditContact contact={contactInfo} />
       <Button
         variant="contained"
-        sx={{ height: 25, display: 'flex', alignItems: 'center', mx: 'auto' }}
-        onClick={() => dispatch(deleteContact(id))}
+        sx={{ height: 25, display: 'flex', alignItems: 'center' }}
+        onClick={() => dispatch(deleteContact(contactInfo.id))}
       >
         Delete
       </Button>
